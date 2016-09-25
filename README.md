@@ -109,7 +109,7 @@ Returns a matrix
   
 --------
 
-> Array *la*.transform(*vector*, *matrix*)
+> *la*.transform(*vector*, *matrix*)
 
 Returns a vector transformed by a matrix
 
@@ -120,7 +120,7 @@ Returns a vector transformed by a matrix
   
 --------
 
-> Array *la*.multiply(*...matricies*)
+> *la*.multiply(*...matricies*)
 
 Returns the product of two or more matricies
 
