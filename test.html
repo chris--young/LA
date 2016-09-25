@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>la test</title>
+
+    <style>
+
+      html, body, canvas {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <canvas></canvas>
+
+    <script src="./la.js"></script>
+
+    <script>
+
+      'use strict'
+
+      const canvas = document.querySelector('canvas');
+      const context = canvas.getContext('2d');
+
+      const zoom = 100;
+
+      canvas.width = document.body.offsetWidth;
+      canvas.height = document.body.offsetHeight;
+
+      context.fillStyle = '#000';
+      context.fillRect(-canvas.width, -canvas.height, canvas.width * 2, canvas.height * 2);
+
+      context.translate(canvas.width / 2, canvas.height / 2);
+      context.scale(1, -1);
+
+      (function grid() {
+        context.save();
+         for (let q = 1; q <= 4; q++) {
+          context.strokeStyle = '#888';
+          context.rotate(Math.PI * 180 / 8);
+          for (let x = 0; x < canvas.width * 2; x += zoom)
+            for (let y = 0; y < canvas.height * 2; y += zoom)
+              context.strokeRect(x, y, zoom, zoom);            
+        }
+        context.restore();
+      })();
+
+      function line(vector, color) {
+        let v = LA.scale(vector, zoom);
+
+        context.strokeStyle = color || '#ff0';
+        context.beginPath();
+          context.moveTo(0, 0);
+          context.lineTo(v[0], v[1]);
+        context.closePath();
+        context.stroke();
+      }
+
+      function point(vector, color) {
+        let v = LA.scale(vector, zoom);
+
+        context.fillStyle = color || '#fff';
+        context.fillRect(v[0] - 2, v[1] - 2, 4, 4);
+      }
+
+      function hats(matrix, color) {
+        line(matrix[0], color || '#0f0');
+        line(matrix[1], color || '#0f0');
+      }
+
+      // ----------------------------------------------------------------------------
+
+      const Vector = LA.Vector(Array)(2);
+      const Matrix = LA.Matrix(Array)(2);
+
+      let i = Vector([1, -2]);
+      let j = Vector([3, 0]);
+
+      // line(i);
+      // line(j);
+
+      let m = Matrix([[1, -2], [3, 0]]);
+      let v = Vector([-1, 2]);
+
+      console.log({ m, v });
+
+      let vt = LA.transform(v, m);
+
+      line(vt, '#00f');
+      hats(m);
+      point(vt);
+
+      let rotate90CounterClockwise = Matrix([[0, 1], [-1, 0]]);
+      let flipVertical = Matrix([[1, 0], [0, -1]]);
+      let result = LA.multiply(rotate90CounterClockwise, rotate90CounterClockwise, flipVertical);
+
+      console.log(result);
+      hats(result);
+
+    </script>
+
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+{
+  "name": "la",
+  "description": "matrix multiplication",
+  "main": "la.js",
+  "authors": [
+    "Chris Young"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "linear",
+    "algebra",
+    "vector",
+    "matrix",
+    "2d",
+    "3d",
+    "4d",
+    "5d",
+    "any",
+    "dimension",
+    "TypedArray"
+  ],
+  "homepage": "https://github.com/chris--young/LA",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

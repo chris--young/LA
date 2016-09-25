@@ -1,0 +1,38 @@
+{
+  "name": "la",
+  "version": "1.0.0",
+  "description": "matrix multiplication",
+  "main": "la.js",
+  "dependencies": {},
+  "devDependencies": {
+    "benchmark": "2.1.1",
+    "mathjs": "3.5.3",
+    "v8-profiler": "5.6.5"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris--young/LA.git"
+  },
+  "keywords": [
+    "linear",
+    "algebra",
+    "vector",
+    "matrix",
+    "2d",
+    "3d",
+    "4d",
+    "5d",
+    "any",
+    "dimension",
+    "TypedArray"
+  ],
+  "author": "Chris Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chris--young/LA/issues"
+  },
+  "homepage": "https://github.com/chris--young/LA#readme"
+}
