@@ -8,7 +8,7 @@ LA has no dependencies but requires some ES6 support.
 
 ```
 
-  ➜ npm install la
+  ➜ npm install @chris-young/la
   ➜ bower install la
 
 ```
