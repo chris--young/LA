@@ -138,12 +138,16 @@
   };
 
   function _matrix(type, dimensions, values) {
-    const m = [];
+    if (type === Array) {
+      const m = [];
 
-    for (let x = 0; x < dimensions; x++)
-      m[x] = _vector(type, dimensions, values && values[x]);
+      for (let x = 0; x < dimensions; x++)
+        m[x] = _vector(type, dimensions, values && values[x]);
 
-    return m;
+      return m;
+    }
+
+    return new ArrayBuffer(type.byteLength * dimensions);
   }
 
   _la.Matrix = function (type) {
