@@ -30,12 +30,10 @@ let mjs2 = mathjs.multiply(mjs0, mjs1);
 
 let la0 = Matrix(m0);
 let la1 = Matrix(m1);
-
-// console.log({ la0 });
-
 let la2 = la.multiply(la0, la1);
 
 // sanity check
+// Only works with Float64Array
 for (let x = 0; x < 150; x++) {
   for (let y = 0; y < 150; y++) {
     if (mjs2._data[x][y] !== la2[x][y]) {
@@ -72,12 +70,6 @@ suite.add('mathjs', function () {
 
   let epoch = now();
 
-  /* let rotate90CounterClockwise = mathjs.matrix([[0, 1], [-1, 0]]);
-  let flipHorizontal = mathjs.matrix([[-1, 0], [0, 1]]);
-  let oneThenTheOther = mathjs.multiply(flipHorizontal, rotate90CounterClockwise); // backwards?
-
-  return oneThenTheOther; */
-
   let m2 = mathjs.matrix(m0);
   let m3 = mathjs.matrix(m1);
   let m4 = mathjs.multiply(m2, m3);
@@ -94,12 +86,6 @@ suite.add('la', function () {
 
   let epoch = now();
 
-  /* let rotate90CounterClockwise = Matrix([[0, 1], [-1, 0]]);
-  let flipHorizontal = Matrix([[-1, 0], [0, 1]]);
-  let oneThenTheOther = la.multiply(rotate90CounterClockwise, flipHorizontal); // backwards?
-
-  return oneThenTheOther; */
-
   let m2 = Matrix(m0);
   let m3 = Matrix(m1);
   let m4 = la.multiply(m2, m3);
@@ -110,16 +96,6 @@ suite.add('la', function () {
 
 });
 
-/* suite.add('old', function () {
-
-  let rotate90CounterClockwise = old._2d.matrix([0, 1], [-1, 0]);
-  let flipHorizontal = old._2d.matrix([-1, 0], [0, 1]);
-  let oneThenTheOther = old._2d.multiply(rotate90CounterClockwise, flipHorizontal); // backwards?
-
-  return oneThenTheOther;
-
-}); */
-
 suite.on('cycle', event => console.log(String(event.target)));
 
 const average = nums => nums.reduce((n1, n2) => n1 + n2) / nums.length;
@@ -127,12 +103,12 @@ const average = nums => nums.reduce((n1, n2) => n1 + n2) / nums.length;
 suite.on('complete', function () {
   console.log({
     mathjs: {
-      n: mjsts.length,
-      a: average(mjsts)
+      number_of_multiplies: `${mjsts.length}x`,
+      average_length_of_multiplication: `${average(mjsts)}ms`
     },
     la: {
-      n: lats.length,
-      a: average(lats)
+      number_of_multiplies: `${lats.length}x`,
+      average_length_of_multiplication: `${average(lats)}ms`
     }
   });
 
@@ -148,12 +124,6 @@ suite.run();
   function test() {
     // const Vector = la.Vector(Number)(2);
     // const Matrix = la.Matrix(Number)(2);
-
-    /* let rotate90CounterClockwise = la._matrix(2, Number, [[0, 1], [-1, 0]]);
-    let flipHorizontal = la._matrix(2, Number, [[-1, 0], [0, 1]]);
-    let oneThenTheOther = la.multiply(rotate90CounterClockwise, flipHorizontal);
-
-    console.log({ rotate90CounterClockwise, flipHorizontal, oneThenTheOther }); */
 
     let m2 = Matrix(m0);
     let m3 = Matrix(m1);

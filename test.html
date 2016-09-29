@@ -80,17 +80,8 @@
       const Vector = LA.Vector(Array)(2);
       const Matrix = LA.Matrix(Array)(2);
 
-      let i = Vector([1, -2]);
-      let j = Vector([3, 0]);
-
-      // line(i);
-      // line(j);
-
       let m = Matrix([[1, -2], [3, 0]]);
       let v = Vector([-1, 2]);
-
-      console.log({ m, v });
-
       let vt = LA.transform(v, m);
 
       line(vt, '#00f');
@@ -101,7 +92,6 @@
       let flipVertical = Matrix([[1, 0], [0, -1]]);
       let result = LA.multiply(rotate90CounterClockwise, rotate90CounterClockwise, flipVertical);
 
-      console.log(result);
       hats(result);
 
     </script>
