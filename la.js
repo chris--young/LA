@@ -2,7 +2,7 @@
 
   'use strict'
 
-  const _la = {};
+  var _la = {};
 
   if (typeof module !== 'undefined')
     module.exports = _la;
@@ -29,9 +29,9 @@
       if (values)
         return values;
 
-      const a = []; // ArrayBuffer?
+      var a = []; // ArrayBuffer?
 
-      for (let x = 0; x < dimensions; x++)
+      for (var x = 0; x < dimensions; x++)
         a[x] = 0;
 
       return a;
@@ -55,28 +55,28 @@
   };
 
   _la.scale = function (vector, scalar) {
-    const v = _vector(vector.constructor, vector.length);
+    var v = _vector(vector.constructor, vector.length);
 
-    for (let x = 0; x < vector.length; x++)
+    for (var x = 0; x < vector.length; x++)
       v[x] = vector[x] * scalar;
 
     return v;
   };
 
   _la.add = function (/* ...vectors */) {
-    const v = _vector(arguments[0].constructor, arguments[0].length);
+    var v = _vector(arguments[0].constructor, arguments[0].length);
 
-    for (let x = 0; x < v.length; x++)
-      for (let y = 0; y < arguments.length; y++)
+    for (var x = 0; x < v.length; x++)
+      for (var y = 0; y < arguments.length; y++)
         v[x] += arguments[y][x];
 
     return v;
   };
 
   function _matrix(type, dimensions, values) {
-    const m = [];
+    var m = [];
 
-    for (let x = 0; x < dimensions; x++)
+    for (var x = 0; x < dimensions; x++)
       m[x] = _vector(type, dimensions, values && values[x]);
 
     return m;
@@ -97,18 +97,18 @@
   };
 
   function _identity(type, dimensions) {
-    const m = _matrix(type, dimensions);
+    var m = _matrix(type, dimensions);
 
-    for (let i = 0; i < dimensions; i++)
+    for (var i = 0; i < dimensions; i++)
       m[i][i] = 1;
 
     return m;
   }
 
   _la.transform = function (vector, matrix) {
-    const s = [];
+    var s = [];
 
-    for (let x = 0; x < vector.length; x++)
+    for (var x = 0; x < vector.length; x++)
       s[x] = _la.scale(matrix[x], vector[x]);
 
     return _la.add.apply(null, s);
@@ -116,18 +116,18 @@
 
   // This wastes memory, is precomputing values slower though? probably not
   function _multiply(matrix0, matrix1) {
-    const m = _matrix(matrix1.length, matrix1[0].constructor);
+    var m = _matrix(matrix1.length, matrix1[0].constructor);
 
-    for (let x = 0; x < matrix1.length; x++)
+    for (var x = 0; x < matrix1.length; x++)
       m[x] = _la.transform(matrix1[x], matrix0);
 
     return m;
   }
 
   _la.multiply = function (/* ...matricies */) {
-    let m = arguments[0];
+    var m = arguments[0];
 
-    for (let x = 1; x < arguments.length; x++)
+    for (var x = 1; x < arguments.length; x++)
       m = _multiply(arguments[x], m);
 
     return m;
