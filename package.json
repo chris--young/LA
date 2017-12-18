@@ -6,7 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "benchmark": "2.1.1",
-    "mathjs": "3.5.3",
+    "mathjs": "3.17.0",
     "v8-profiler": "5.6.5"
   },
   "scripts": {
